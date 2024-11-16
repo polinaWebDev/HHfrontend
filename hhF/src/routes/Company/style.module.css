@@ -1,0 +1,7 @@
+.card {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 5px;
+    list-style: none;
+}

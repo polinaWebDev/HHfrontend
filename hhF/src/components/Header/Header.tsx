@@ -19,8 +19,8 @@ const Header = () => {
                                 <Link to='/resume/:userId' >
                                     <button id={`${style.resume}`}>Create resume</button>
                                 </Link>
-                                <Link to='/create/company' >
-                                    <button id={`${style.resume}`}>Create company</button>
+                                <Link to='/my-companies' >
+                                    <button id={`${style.resume}`}>My companies</button>
                                 </Link>
                                 <Link to='/profile'>
                                     <button className={`${style.cta_bts}`}>Profile</button>

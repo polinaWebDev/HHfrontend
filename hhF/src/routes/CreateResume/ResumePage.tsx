@@ -1,9 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import ResumeEditor from "../../components/Resume/ResumeEditor.tsx";
 
 const ResumeEditorPage: React.FC = () => {
-    const { userId } = useParams<{ userId: string }>();
+    const { userId } = sessionStorage
+
 
     if (!userId) {
         return <p>User ID is missing.</p>;
@@ -11,8 +11,8 @@ const ResumeEditorPage: React.FC = () => {
 
     return (
         <div>
-            <h2>Edit Resume for User: {userId}</h2>
-            <ResumeEditor userId={userId} />
+            <h2>Edit Resume</h2>
+            <ResumeEditor />
         </div>
     );
 };

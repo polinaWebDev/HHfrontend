@@ -3,10 +3,12 @@ import {IndexLayout} from "./index_layout/index_layout";
 import {HomeScreen} from "./home/HomeScreen.tsx";
 import {LoginPage} from "./Login/LoginPage.tsx";
 import {ProfilePage} from "./Profile/ProfilePage.tsx";
-import CreateCompanyForm from "../components/Company/CreateCompanyForm.tsx";
 import {RegisterPage} from "./Register/RegisterPage.tsx";
 import ChatPage from "./Chats/ChatPage.tsx";
 import ResumeEditorPage from "./CreateResume/ResumePage.tsx";
+import MyCompanies from "./Company/My-companies.tsx";
+import CreateCompanyPage from "./Company/CreateCompanyPage.tsx";
+import CompanyDetailsPage from "./Company/Details/CompanyDetailsPage.tsx";
 
 export const appRouter = createMemoryRouter([
     {
@@ -31,12 +33,20 @@ export const appRouter = createMemoryRouter([
                 element: <ProfilePage/>
             },
             {
-                path: "/create/company",
-                element: <CreateCompanyForm/>
+                path: "/my-companies",
+                element: <MyCompanies/>
+            },
+            {
+              path: "/companies/create",
+              element: <CreateCompanyPage/>
             },
             {
                 path: "/chats",
                 element: <ChatPage/>
+            },
+            {
+                path: "/company/:companyId",
+                element: <CompanyDetailsPage/>
             },
             {
                 path: "/resume/:userId",

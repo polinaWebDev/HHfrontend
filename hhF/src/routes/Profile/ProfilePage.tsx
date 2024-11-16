@@ -36,6 +36,7 @@ export const ProfilePage = () => {
     if (err) return <p>Error: {err.message}</p>;
 
     if(!profile) return <p>Profile not found</p>;
+    console.log(profile.id)
 
     return (
         <div>
@@ -68,7 +69,7 @@ export const ProfilePage = () => {
                 <p>Email: {profile.email}</p>
 
                 <p>Avatar:</p>
-                <UserAvatarUpload/>
+                <UserAvatarUpload userId={profile.id} />
             </>
             )}
         </div>

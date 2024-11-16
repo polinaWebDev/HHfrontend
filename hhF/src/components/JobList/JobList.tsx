@@ -1,11 +1,14 @@
 import {useGetJobs} from "../../hooks/useGetJobs.ts";
 import React, {useEffect, useRef, useState} from "react";
+import JobCard from "./JobCard.tsx";
 
 const JobList = () => {
     const [searchTitle, setSearchTitle] = useState("");
     const { jobs, loading, error } = useGetJobs(searchTitle);
     const inputRef = useRef<HTMLInputElement>(null);
-    //Отмена рендинга на определенный элемент
+
+    const userId = sessionStorage.getItem('userId')!;
+
 
     useEffect(() => {
         if (inputRef.current) {
@@ -19,6 +22,7 @@ const JobList = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error loading job: {error.message}</p>;
+    console.log("jobs:", jobs);
 
     return (
         <div>
@@ -31,13 +35,14 @@ const JobList = () => {
                 onChange={handleSearchChange}
             />
             <ul>
-                {jobs.map((job) => (
-                    <li key={job.id}>
-                        <h3>{job.title}</h3>
-                        <p>{job.description}</p>
-                        <p>Salary: {job.salary}</p>
-                    </li>
-                ))}
+                {jobs.map((job, ) => {
+                    console.log("job.id:", job.id); // Вывод job.id в консоль
+                    return (
+                        <li key={job.id}>
+                            <JobCard jobId={job.id} title={job.title} description={job.description} userId={userId}/>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );

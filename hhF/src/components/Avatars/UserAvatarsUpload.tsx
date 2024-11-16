@@ -1,12 +1,13 @@
-// components/UserAvatarUpload.tsx
 import axios from 'axios';
-import React, { useState, ChangeEvent } from 'react';
-import { useParams } from 'react-router-dom';
+import  { useState, ChangeEvent } from 'react';
 
 const SERVER_URL = 'http://localhost:3000';
 
-const UserAvatarUpload: React.FC = () => {
-    const { userId } = useParams();
+interface UserAvatarUploadProps {
+    userId: string;
+}
+
+const UserAvatarUpload: React.FC<UserAvatarUploadProps> = ({ userId }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 

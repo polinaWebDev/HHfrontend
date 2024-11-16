@@ -17,6 +17,7 @@ export const LoginPage = () => {
         try {
             const data = await login(email, password);
             localStorage.setItem('token', data.token);
+            sessionStorage.setItem('userId', data.userId);
             setIsAuth(true);
             navigate('/')
         } catch (err) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import {useResumeEditor} from "../../hooks/useResumeEditor.ts";
 
-const ResumeEditor: React.FC<{ userId: string }> = ({ userId }) => {
-    const { isLoading, saveResume, editorContainerId } = useResumeEditor(userId);
+const ResumeEditor: React.FC = () => {
+    const { isLoading, saveResume, editorContainerId } = useResumeEditor();
 
     return (
         <div>

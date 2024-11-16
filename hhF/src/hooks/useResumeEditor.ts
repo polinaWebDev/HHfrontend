@@ -10,7 +10,8 @@ interface UseResumeEditorReturn {
     editorContainerId: string;
 }
 
-export const useResumeEditor = (userId:string):UseResumeEditorReturn => {
+export const useResumeEditor = ():UseResumeEditorReturn => {
+    const userId = sessionStorage.getItem("userId");
     const editorInstance = useRef<EditorJS | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [resumeId, setResumeId] = useState<string | null>(null);
@@ -39,10 +40,11 @@ export const useResumeEditor = (userId:string):UseResumeEditorReturn => {
 
             const fetchResume = async () => {
                 try {
-                    const res = await apiClient.get(`http://localhost:3000/resume/:userId`);
-                    if (res.data && editorInstance.current) {
-                        setResumeId(res.data.id);
-                        editorInstance.current.render(res.data.content);
+                    const res = await apiClient.get(`${SERVER_URL}/user/:userId`);
+                    if (res.data && res.data.resumes && res.data.resumes.length > 0 && editorInstance.current) {
+                        const resume = res.data.resumes[0];
+                        setResumeId(resume.resume_id);
+                        editorInstance.current.render(resume.content);
                     }
                 } catch (err) {
                     console.error(err);
@@ -54,9 +56,7 @@ export const useResumeEditor = (userId:string):UseResumeEditorReturn => {
             await fetchResume();
         }
 
-        if (!isLoading) {
             initializeEditor();
-        }
 
 
         return () => {
@@ -74,15 +74,14 @@ export const useResumeEditor = (userId:string):UseResumeEditorReturn => {
 
             try {
                 if (resumeId) {
-                    await apiClient.put(`${SERVER_URL}/${resumeId}`, {
+                    await apiClient.put(`${SERVER_URL}/update${resumeId}`, {
                         data: content
                     });
 
                     alert("Successfully updated resume");
                 } else {
-                    const res = await apiClient.post(SERVER_URL, {
-                        data: content,
-                        userId: userId,
+                    const res = await apiClient.post(`${SERVER_URL}/create/${userId}`,  {
+                        data: content
                     });
 
                     setResumeId(res.data.resumeId);
